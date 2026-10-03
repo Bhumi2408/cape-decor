@@ -1,0 +1,7 @@
+# Never show folder listings
+Options -Indexes
+
+DirectoryIndex index.html
+
+# Custom 404 page from the Next.js export
+ErrorDocument 404 /404.html
