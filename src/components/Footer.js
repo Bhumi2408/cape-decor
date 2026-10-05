@@ -69,7 +69,7 @@ export default function Footer() {
           {categories.map((c) => (
             <FooterLink key={c.id} href={`/products#${c.id}`}>{c.short}</FooterLink>
           ))}
-          <FooterLink href="/downloads">E-Catalogues</FooterLink>
+          <FooterLink href="/downloads">E-catalogues</FooterLink>
         </FooterCol>
 
         <FooterCol title="Get in touch">

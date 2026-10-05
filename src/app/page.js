@@ -417,7 +417,7 @@ export default function HomePage() {
             align="center"
             eyebrow="Inspiration"
             title={<>Spaces we&apos;ve <em>shaped</em></>}
-            intro="Doors, windows, window blinds and walls in real spaces. Tap any photo to explore the product."
+            intro="Doors, windows, window blinds and printed wallpapers in real spaces. Tap any photo to explore the product."
             className="mb-14"
           />
           <div className="columns-2 gap-4 md:columns-3 md:gap-5 lg:columns-4">

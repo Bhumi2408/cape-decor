@@ -51,8 +51,10 @@ const catalogueLabel = (path) =>
     .replace(/(^|\s)([a-z])/g, (_, sp, ch) => sp + ch.toUpperCase())
     .replace(/\bCustomized\b/g, "Customised");
 
-const catalogue = (path, label) => ({
-  label: label ?? catalogueLabel(path),
+// `options.label` overrides the name. Taking an options object (not a plain
+// second argument) keeps `.map(catalogue)` safe, since map passes the index.
+const catalogue = (path, options) => ({
+  label: options?.label ?? catalogueLabel(path),
   href: encodeURI(CATALOGUE_BASE + path),
 });
 
@@ -70,7 +72,9 @@ export const hero = {
 // ---------------------------------------------------------------------------
 // Categories
 // ---------------------------------------------------------------------------
-const doorsWindowsCatalogue = catalogue("catalogues/doors-windows/uPVC_Aluminium_Doors_Windows_Catalogue.pdf", "uPVC & Aluminium Doors & Windows");
+const doorsWindowsCatalogue = catalogue("catalogues/doors-windows/uPVC_Aluminium_Doors_Windows_Catalogue.pdf", {
+  label: "uPVC & Aluminium Doors & Windows",
+});
 
 export const categories = [
   {
@@ -338,7 +342,7 @@ const upvc = [
     short: "Side-hinged uPVC windows with a tight seal against noise and dust.",
     images: ["upvc-casement-window.jpg"].map(img),
     description: [
-      "uPVC casement windows are hinged at the side and open outward for full ventilation. When closed, multi-chamber profiles and gaskets seal tight against noise, dust and rain.",
+      "Casement windows are hinged at the side and open outward for full ventilation. When closed, multi-chamber profiles and gaskets seal tight against noise, dust and rain.",
       "G.I. reinforcement keeps them rigid, and double glazing can cut outside noise by up to 25 dB.",
     ],
     options: ["60 mm profile", "G.I. reinforced", "Single or double glazing", "20-year warranty"],
@@ -426,7 +430,7 @@ const upvc = [
     short: "Hinged uPVC doors that keep out noise, dust and draughts.",
     images: ["upvc-casement-door.jpg"].map(img),
     description: [
-      "uPVC casement doors are side-hinged and open like a traditional door, with insulated multi-chamber profiles that keep rooms quiet and comfortable.",
+      "Casement doors are side-hinged and open like a traditional door, with insulated multi-chamber profiles that keep rooms quiet and comfortable.",
       "Available up to 1050 × 2680 mm with single or double glazing.",
     ],
     options: ["Up to 1050 × 2680 mm", "G.I. reinforced", "Single or double glazing", "20-year warranty"],
@@ -557,7 +561,7 @@ const blinds = [
       "Unlike standard blinds, Roman Blinds stack up evenly when opened and stay visibly smooth when closed — never bumpy or ribbed. Cords run through evenly spaced stiffener rods on the back of the fabric, so the lowered portion remains smooth while the top stacks neatly.",
       "A top-down/bottom-up mechanism lets only the top of the fabric come down, giving privacy while still letting in natural light.",
     ],
-    options: ["Classic Style", "Fascia Style", "Cord lock & cord clutch", "Wireless motorised"],
+    options: ["Classic Style", "Fascia Style", "Chain/Cord operation", "Wireless motorised"],
     catalogues: [
       "catalogues/roman_blind/DREAM'Z_COMMERCIAL_COLLECTION.pdf",
       "catalogues/Classic_Solids_Collection.pdf",

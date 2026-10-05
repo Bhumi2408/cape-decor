@@ -6,7 +6,7 @@ import { Reveal } from "@/components/motion";
 import { ArrowUpRight, Download, WhatsApp } from "@/components/Icons";
 
 export const metadata = {
-  title: "E-Catalogues",
+  title: "E-catalogues",
   description: "Download Cape Decor e-catalogues for uPVC & Aluminium System Doors & Windows and every CAPE blind collection.",
 };
 
@@ -20,9 +20,9 @@ export default function DownloadsPage() {
     <>
       <PageHero
         image="/products/Roman7.jpg"
-        crumbs={[{ label: "E-Catalogues" }]}
+        crumbs={[{ label: "E-catalogues" }]}
         eyebrow="Downloads"
-        title={<>E-Catalogues &amp; <em>collections</em></>}
+        title={<>E-catalogues &amp; <em>collections</em></>}
         intro={`${total} downloadable e-catalogues covering doors, windows and every blind fabric, pattern and design. Tap any one to open the PDF.`}
       />
 

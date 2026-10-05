@@ -17,7 +17,7 @@ export default function ProductsPage() {
         image="/products/home-glass-house.jpg"
         crumbs={[{ label: "Products" }]}
         eyebrow="Our products"
-        title={<>Doors, Windows, Window Blinds <em>&amp; Walls</em></>}
+        title={<>Doors, Windows, Window Blinds <em>&amp; Printed Wallpapers</em></>}
         intro={`${products.length} products across four categories — every one made to measure and installed by our own team.`}
       >
         <div className="flex flex-wrap gap-2">
