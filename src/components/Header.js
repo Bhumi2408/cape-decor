@@ -10,6 +10,16 @@ import { ArrowRight, ArrowUpRight, ChevronDown, Close, Facebook, Instagram, Mail
 
 export default function Header() {
   const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // Close the products dropdown after a link in it is clicked, and drop focus so
+  // it can't stay open on the next page.
+  const closeMenuOnLink = (e) => {
+    if (e.target.closest("a")) {
+      setMenuOpen(false);
+      e.target.closest("a").blur();
+    }
+  };
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -79,12 +89,23 @@ export default function Header() {
           <nav className="hidden items-center gap-1 lg:flex" aria-label="Main">
             {nav.map((item) =>
               item.href === "/products" ? (
-                <div key={item.href} className="group relative">
+                <div
+                  key={item.href}
+                  className="relative"
+                  onMouseEnter={() => setMenuOpen(true)}
+                  onMouseLeave={() => setMenuOpen(false)}
+                  onFocus={() => setMenuOpen(true)}
+                  onBlur={(e) => {
+                    if (!e.currentTarget.contains(e.relatedTarget)) setMenuOpen(false);
+                  }}
+                  onKeyDown={(e) => e.key === "Escape" && setMenuOpen(false)}
+                  onClick={closeMenuOnLink}
+                >
                   <NavLink href={item.href} active={isActive(item.href)}>
                     {item.label}
-                    <ChevronDown width={15} height={15} className="transition-transform duration-300 group-hover:rotate-180" />
+                    <ChevronDown width={15} height={15} className={`transition-transform duration-300 ${menuOpen ? "rotate-180" : ""}`} />
                   </NavLink>
-                  <ProductsMenu />
+                  <ProductsMenu open={menuOpen} />
                 </div>
               ) : (
                 <NavLink key={item.href} href={item.href} active={isActive(item.href)}>
@@ -207,7 +228,7 @@ function NavLink({ href, active, children }) {
   );
 }
 
-function ProductsMenu() {
+function ProductsMenu({ open }) {
   const [active, setActive] = useState(categories[0].id);
   const [hovered, setHovered] = useState(null);
   const cat = categories.find((c) => c.id === active);
@@ -228,7 +249,11 @@ function ProductsMenu() {
   };
 
   return (
-    <div className="invisible absolute top-full left-1/2 w-[64rem] -translate-x-1/2 translate-y-3 pt-4 opacity-0 transition-all duration-300 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+    <div
+      className={`absolute top-full left-1/2 w-[64rem] -translate-x-1/2 pt-4 transition-all duration-300 ${
+        open ? "visible translate-y-0 opacity-100" : "invisible translate-y-3 opacity-0"
+      }`}
+    >
       <div className="grid grid-cols-[15rem_1fr_16rem] gap-6 rounded-3xl border border-line bg-paper p-6 shadow-[0_40px_80px_-30px_rgb(42_35_38/0.35)]">
         <ul className="space-y-1 border-r border-line pr-5">
           {categories.map((c, i) => (
